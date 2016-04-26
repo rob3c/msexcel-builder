@@ -1,29 +1,34 @@
 {
   "author": "Charlie Zheng <chuanyi.zheng@gmail.com>",
-  "name": "msexcel-builder",
-  "description": "A tiny library to create Microsoft Office Excel(2007) files under Nodejs.",
+  "name": "msexcel-builder-rob3c",
+  "description": "[rob3c fork] A tiny library to create Microsoft Office Excel(2007) files under Nodejs.",
   "tags": [
     "xlsx",
-    "excel"
+    "excel",
+    "rob3c-forks"
   ],
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/chuanyi/msexcel-builder.git"
+    "url": "git://github.com/rob3c/msexcel-builder.git"
   },
   "bugs": {
-    "url": "https://github.com/chuanyi/msexcel-builder/issues"
+    "url": "https://github.com/rob3c/msexcel-builder/issues"
   },
   "main": "./lib/msexcel-builder.js",
   "engines": {
     "node": "*"
   },
   "scripts": {
+    "build": "coffee --compile --map --output lib/ src/",
     "test": "mocha"
   },
   "dependencies": {
     "async": "~0.2.6",
     "jszip": "^2.5.0",
     "xmlbuilder": ">=0.4.2"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.10.0"
   }
 }

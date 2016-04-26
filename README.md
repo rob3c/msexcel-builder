@@ -1,6 +1,8 @@
 # msexcel-builder
 
-A simple and fast library to create MS Office Excel(>2007) xlsx files(Compatible with the OpenOffice document format). 
+A simple and fast library to create MS Office Excel(>2007) xlsx files(Compatible with the OpenOffice document format).
+
+Forked from [msexcel-builder](https://github.com/chuanyi/msexcel-builder)
 
 Features:
 
@@ -29,15 +31,15 @@ Then create a sample workbook with one sheet and some data.
 ```javascript
   // Create a new workbook file in current working-path
   var workbook = excelbuilder.createWorkbook('./', 'sample.xlsx')
-  
+
   // Create a new worksheet with 10 columns and 12 rows
   var sheet1 = workbook.createSheet('sheet1', 10, 12);
-  
+
   // Fill some data
   sheet1.set(1, 1, 'I am title');
   for (var i = 2; i < 5; i++)
     sheet1.set(i, 1, 'test'+i);
-  
+
   // Save it
   workbook.save(function(err){
     if (err)
@@ -169,7 +171,7 @@ sheet1.rotate(1, 1, 90);
 
 Set cell font style, fill style or border style
 
-* `font_style` - (Object) font style options 
+* `font_style` - (Object) font style options
 The options may contain:
 
   * `name` - (String) font name
@@ -183,8 +185,7 @@ The options may contain:
 The options may contain:
 
   * `type` - (String) fill type: such as 'solid'
-  * `fgColor` - (String) front color
-  * `bgColor` - (String) background color
+  * `fgColor` - (String) background color in ARGB format (e.g. FFFAFAD2)
 
 * `border_style` - (Object) border style options
 The options may contain:
@@ -197,8 +198,8 @@ The options may contain:
 Example:
 
 ```javascript
-sheet1.font(2, 1, {name:'黑体',sz:'24',family:'3',scheme:'-',bold:'true',iter:'true'});
-sheet1.fill(3, 3, {type:'solid',fgColor:'8',bgColor:'64'});
+sheet1.font(2, 1, {name:'Calibri',sz:'12',family:'2',scheme:'-',bold:'true',iter:'true'});
+sheet1.fill(3, 3, {type:'solid',fgColor:'FFFAFAD2',bgColor:'64'});
 sheet1.border(1, 1, {left:'medium',top:'medium',right:'thin',bottom:'medium'});
 ```
 
@@ -210,7 +211,7 @@ Merge some cell ranges
 The cell object contains:
 
   * `col` - (Number) cell column index(start with 1)
-  * `row` - (Number) cell row index(start with 1) 
+  * `row` - (Number) cell row index(start with 1)
 
 Example: Merge the first row as title from (1,1) to (5,1)
 
@@ -229,18 +230,8 @@ In node.js
 
 ## Release notes
 
-v0.1.0
-* Generate JSZip object, dropping need to generate temporary files on disk.
-* Removed dependency on `fs-extra` and `exec` and `easy-zip`.
-* Added dependency on `js-zip`.
-* Removed method `save` and replaced it with `generate(callback)` that returns a JSZip object.
-* This now theoretically should be able to run in the browser, though that is not tested.
-* Also refactored base Excel files so they are read from code rather than from disk.
+v0.1.1
 
-v0.0.2:
-* Switch compress work to easy-zip to support Heroku deployment.
-
-v0.0.1: Includes
-
-* First release.
-* Using 7z.exe to do compress work, so only support windows now.
+- Forked v0.1.0 of [msexcel-builder](https://github.com/chuanyi/msexcel-builder)
+- Merged a CoffeeScript version of the colorfix by [aloteot](https://github.com/aloteot/msexcel-builder/commit/08bac71924eaa3b4aec84c26f8df3d32073d85da)
+- Removed the theme and Chinese font references
