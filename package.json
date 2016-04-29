@@ -7,7 +7,7 @@
     "excel",
     "rob3c-forks"
   ],
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/rob3c/msexcel-builder.git"
@@ -24,11 +24,12 @@
     "test": "mocha"
   },
   "dependencies": {
-    "async": "~0.2.6",
-    "jszip": "^2.5.0",
-    "xmlbuilder": ">=0.4.2"
+    "async": "0.2.6",
+    "jszip": "2.5.0",
+    "xmlbuilder": "0.4.2"
   },
   "devDependencies": {
-    "coffee-script": "^1.10.0"
+    "coffee-script": "~1.10.0",
+    "mocha": "~2.4.5"
   }
 }

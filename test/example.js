@@ -1,4 +1,6 @@
 var fs = require('fs');
+var os = require('os');
+var path = require('path');
 var assert = require('assert');
 var JSZip = require('jszip');
 
@@ -10,7 +12,13 @@ function compareWorkbooks(path1, path2) {
 
   for (var key in zip1.files) {
     //console.log(key, zip1.file(key).asText().length, zip2.file(key).asText().length)
-    assert.equal(zip1.file(key).asText(), zip2.file(key).asText())
+    var zip1file = zip1.file(key);
+    var zip2file = zip2.file(key);
+    assert.equal(zip1file && zip1file.asText(), zip2file && zip2file.asText(),
+      'zip1.file(' + key + ') does not match zip1.file(' + key + '):' + os.EOL +
+      (zip1file && zip1file.asText()) + os.EOL +
+      '      !==' + os.EOL +
+      (zip2file && zip2file.asText()));
   }
 }
 
@@ -38,7 +46,7 @@ describe('It generates a simple workbook', function() {
       if (err) throw err;
       else {
         var buffer = zip.generate({type: "nodebuffer"});
-        var OUTFILE = '/tmp/example.xlsx';
+        var OUTFILE = path.join(os.tmpdir(), 'example.xlsx');
         fs.writeFile(OUTFILE, buffer, function (err) {
           console.log('Test file written to ' + OUTFILE);
           compareWorkbooks('./test/files/example.xlsx', OUTFILE)
@@ -49,7 +57,7 @@ describe('It generates a simple workbook', function() {
   })
 
   it ('Supports the prior constructor syntax', function(done) {
-    var PATH = '/tmp';
+    var PATH = os.tmpdir();
     var FILENAME = 'example2.xlsx';
     var workbook = excelbuilder.createWorkbook(PATH, FILENAME);
     var sheet1 = workbook.createSheet('sheet1', 10, 12);
@@ -61,7 +69,7 @@ describe('It generates a simple workbook', function() {
     workbook.save(function (err) {
       if (err) throw err;
       else {
-        var OUTFILE = PATH + "/" + FILENAME;
+        var OUTFILE = path.join(PATH, FILENAME);
         console.log('Test file written to ' + OUTFILE);
         done()
       }
